@@ -3,55 +3,54 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AirPlay.Listeners
+namespace AirPlay.Listeners;
+
+public class BaseUdpListener : BaseListener
 {
-    public class BaseUdpListener : BaseListener
+    public const int CloseTimeout = 1000;
+
+    private readonly Socket _cSocket;
+    private readonly Socket _dSocket;
+    private readonly CancellationTokenSource _cancellationTokenSource;
+
+    public BaseUdpListener(ushort cPort, ushort dPort)
     {
-        public const int CloseTimeout = 1000;
+        _cSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, System.Net.Sockets.ProtocolType.Udp);
+        _dSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, System.Net.Sockets.ProtocolType.Udp);
 
-        private readonly Socket _cSocket;
-        private readonly Socket _dSocket;
-        private readonly CancellationTokenSource _cancellationTokenSource;
+        _cSocket.Bind(new IPEndPoint(IPAddress.Any, cPort));
+        _dSocket.Bind(new IPEndPoint(IPAddress.Any, dPort));
 
-        public BaseUdpListener(ushort cPort, ushort dPort)
-        {
-            _cSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, System.Net.Sockets.ProtocolType.Udp);
-            _dSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, System.Net.Sockets.ProtocolType.Udp);
+        _cancellationTokenSource = new CancellationTokenSource();
+    }
 
-            _cSocket.Bind(new IPEndPoint(IPAddress.Any, cPort));
-            _dSocket.Bind(new IPEndPoint(IPAddress.Any, dPort));
+    public override Task StartAsync(CancellationToken cancellationToken)
+    {
+        var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cancellationTokenSource.Token);
 
-            _cancellationTokenSource = new CancellationTokenSource();
-        }
+        Task.Run(() => OnRawCSocketAsync(_cSocket, source.Token), source.Token);
+        Task.Run(() => OnRawDSocketAsync(_dSocket, source.Token), source.Token);
 
-        public override Task StartAsync(CancellationToken cancellationToken)
-        {
-            var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cancellationTokenSource.Token);
+        return Task.CompletedTask;
+    }
 
-            Task.Run(() => OnRawCSocketAsync(_cSocket, source.Token), source.Token);
-            Task.Run(() => OnRawDSocketAsync(_dSocket, source.Token), source.Token);
+    public override Task StopAsync()
+    {
+        _cancellationTokenSource.Cancel();
 
-            return Task.CompletedTask;
-        }
+        _cSocket.Close(CloseTimeout);
+        _dSocket.Close(CloseTimeout);
 
-        public override Task StopAsync()
-        {
-            _cancellationTokenSource.Cancel();
+        return Task.CompletedTask;
+    }
 
-            _cSocket.Close(CloseTimeout);
-            _dSocket.Close(CloseTimeout);
+    public virtual Task OnRawCSocketAsync(Socket cSocket, CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
 
-            return Task.CompletedTask;
-        }
-
-        public virtual Task OnRawCSocketAsync(Socket cSocket, CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
-
-        public virtual Task OnRawDSocketAsync(Socket dSocket, CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
+    public virtual Task OnRawDSocketAsync(Socket dSocket, CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
     }
 }

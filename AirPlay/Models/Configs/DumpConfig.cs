@@ -1,7 +1,6 @@
-﻿namespace AirPlay.Models.Configs
+﻿namespace AirPlay.Models.Configs;
+
+public class DumpConfig
 {
-    public class DumpConfig
-    {
-        public string Path { get; set; }
-    }
+    public string Path { get; set; }
 }

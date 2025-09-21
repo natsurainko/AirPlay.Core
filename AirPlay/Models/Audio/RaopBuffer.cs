@@ -1,17 +1,15 @@
-﻿using System;
-using AirPlay.Listeners;
+﻿using AirPlay.Listeners;
 
-namespace AirPlay.Models
+namespace AirPlay.Models;
+
+public class RaopBuffer
 {
-	public class RaopBuffer
-    {
-		public bool IsEmpty { get; set; }
-		public ushort FirstSeqNum { get; set; }
-		public ushort LastSeqNum { get; set; }
+    public bool IsEmpty { get; set; }
+    public ushort FirstSeqNum { get; set; }
+    public ushort LastSeqNum { get; set; }
 
-		public RaopBufferEntry[] Entries = new RaopBufferEntry[AudioListener.RAOP_BUFFER_LENGTH];
+    public RaopBufferEntry[] Entries = new RaopBufferEntry[AudioListener.RAOP_BUFFER_LENGTH];
 
-		public int BufferSize { get; set; }
-		public byte[] Buffer { get; set; }
-	}
+    public int BufferSize { get; set; }
+    public byte[] Buffer { get; set; }
 }

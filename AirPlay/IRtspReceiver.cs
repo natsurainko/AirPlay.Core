@@ -1,14 +1,12 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using AirPlay.Models;
+﻿using AirPlay.Models;
+using AirPlay.Models.Audio;
 
-namespace AirPlay
+namespace AirPlay;
+
+public interface IRtspReceiver
 {
-    public interface IRtspReceiver
-    {
-        void OnSetVolume(decimal volume);
-        void OnData(H264Data data);
-        void OnPCMData(PcmData data);
-    }
+    void OnSetVolume(decimal volume);
+    void OnData(H264Data data);
+    void OnPCMData(PcmData data);
+    void OnTrackInfoValue(TrackInfoValue infoValue);
 }
