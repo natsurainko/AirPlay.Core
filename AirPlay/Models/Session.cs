@@ -33,9 +33,9 @@ public class Session(string sessionId)
 
     public bool? MirroringSession = null;
 
-    public string DacpId { get; set; } = null;
+    public string? DacpId { get; set; } = null;
 
-    public IPEndPoint DacpEndPoint { get; set; } = null;
+    public IPEndPoint? DacpEndPoint { get; set; } = null;
 
     public bool PairCompleted => EcdhShared != null && (PairVerified ?? false);
     public bool FairPlaySetupCompleted => KeyMsg != null && EcdhShared != null && (PairVerified ?? false);

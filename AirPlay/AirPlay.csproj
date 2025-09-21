@@ -2,14 +2,12 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
-    <DefineConstants>TRACE;DEBUG;NETCOREAPP;NETCOREAPP2_2</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>TRACE;DEBUG;NETCOREAPP</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
@@ -29,6 +27,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
     <PackageReference Include="NaCl.Net" Version="0.1.13" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="plist-cil" Version="2.3.1" />
     <PackageReference Include="RtspClientSharp" Version="1.3.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="SharpJaad.AAC" Version="0.0.6" />
@@ -47,25 +46,7 @@
     <None Remove="Tables\table_s9.bin" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Listeners\" />
-    <Folder Include="Utils\" />
-    <Folder Include="Crypto\" />
-    <Folder Include="DMapTagged\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Listeners\Bases\" />
-    <Folder Include="Models\TcpListeners\" />
-    <Folder Include="Models\Mirroring\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="Crypto\Aes128CounterMode.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="appsettings_win.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Tables\table_s1.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\table_s1.bin" />
@@ -78,10 +59,5 @@
     <EmbeddedResource Include="Resources\table_s7.bin" />
     <EmbeddedResource Include="Resources\table_s8.bin" />
     <EmbeddedResource Include="Resources\table_s9.bin" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="plist-cil">
-      <HintPath>..\lib\plist-cil\plist-cil.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>

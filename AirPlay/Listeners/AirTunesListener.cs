@@ -61,70 +61,85 @@ public class AirTunesListener : BaseTcpListener
 
         if (request.Type == RequestType.GET && "/info".Equals(request.Path, StringComparison.OrdinalIgnoreCase))
         {
-            var dict = new Dictionary<string, object>();
-            dict.Add("features", 61379444727);
-            dict.Add("name", "airserver");
-            dict.Add("displays", new List<Dictionary<string, object>>
+            var dict = new Dictionary<string, object>
             {
-                new() 
+                { "features", 61379444727 },
+                { "name", "airserver" },
                 {
-                    { "primaryInputDevice", 1 },
-                    { "rotation", true },
-                    { "widthPhysical", 0 },
-                    { "edid", "AP///////wAGEBOuhXxiyAoaAQS1PCJ4IA8FrlJDsCYOT1QAAAABAQEBAQEBAQEBAQEBAQEBAAAAEAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA/ABpTWFjCiAgICAgICAgAAAAAAAAAAAAAAAAAAAAAAAAAqBwE3kDAAMAFIBuAYT/E58AL4AfAD8LUQACAAQAf4EY+hAAAQEAEnYx/Hj7/wIQiGLT+vj4/v//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADHkHATeQMAAwFQU+wABP8PnwAvAB8A/whBAAIABABM0AAE/w6fAC8AHwBvCD0AAgAEAMyRAAR/DJ8ALwAfAAcHMwACAAQAVV4ABP8JnwAvAB8AnwUoAAIABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB+Q" },
-                    { "widthPixels", 1920.0 },
-                    { "uuid", "061013ae-7b0f-4305-984b-974f677a150b" },
-                    { "heightPhysical", 0 },
-                    { "features", 30 },
-                    { "heightPixels", 1080.0 },
-                    { "overscanned", false }
-                }
-            });
-            dict.Add("audioFormats", new List<Dictionary<string, object>>
-            {
-                {
-                    new Dictionary<string, object> {
-                        { "type", 100 },
-                        { "audioInputFormats", 67108860 },
-                        { "audioOutputFormats", 67108860 }
+                    "displays",
+                    new List<Dictionary<string, object>>
+                    {
+                        new()
+                        {
+                            { "primaryInputDevice", 1 },
+                            { "rotation", true },
+                            { "widthPhysical", 0 },
+                            { "edid", "AP///////wAGEBOuhXxiyAoaAQS1PCJ4IA8FrlJDsCYOT1QAAAABAQEBAQEBAQEBAQEBAQEBAAAAEAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA/ABpTWFjCiAgICAgICAgAAAAAAAAAAAAAAAAAAAAAAAAAqBwE3kDAAMAFIBuAYT/E58AL4AfAD8LUQACAAQAf4EY+hAAAQEAEnYx/Hj7/wIQiGLT+vj4/v//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADHkHATeQMAAwFQU+wABP8PnwAvAB8A/whBAAIABABM0AAE/w6fAC8AHwBvCD0AAgAEAMyRAAR/DJ8ALwAfAAcHMwACAAQAVV4ABP8JnwAvAB8AnwUoAAIABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB+Q" },
+                            { "widthPixels", 1920.0 },
+                            { "uuid", "061013ae-7b0f-4305-984b-974f677a150b" },
+                            { "heightPhysical", 0 },
+                            { "features", 30 },
+                            { "heightPixels", 1080.0 },
+                            { "overscanned", false }
+                        }
                     }
                 },
                 {
-                    new Dictionary<string, object> {
-                        { "type", 101 },
-                        { "audioInputFormats", 67108860 },
-                        { "audioOutputFormats", 67108860 }
-                    }
-                }
-            });
-            dict.Add("vv", 2);
-            dict.Add("statusFlags", 4);
-            dict.Add("keepAliveLowPower", true);
-            dict.Add("sourceVersion", "220.68");
-            dict.Add("pk", "29fbb183a58b466e05b9ab667b3c429d18a6b785637333d3f0f3a34baa89f45c");
-            dict.Add("keepAliveSendStatsAsBody", true);
-            dict.Add("deviceID", "78:7B:8A:BD:C9:4D");
-            dict.Add("model", "AppleTV5,3");
-            dict.Add("audioLatencies", new List<Dictionary<string, object>>
-            {
-                {
-                    new Dictionary<string, object> {
-                        { "outputLatencyMicros", 0 },
-                        { "type", 100 },
-                        { "audioType", "default" },
-                        { "inputLatencyMicros", 0 }
+                    "audioFormats",
+                    new List<Dictionary<string, object>>
+                    {
+                        {
+                            new Dictionary<string, object> 
+                            {
+                                { "type", 100 },
+                                { "audioInputFormats", 67108860 },
+                                { "audioOutputFormats", 67108860 }
+                            }
+                        },
+                        {
+                            new Dictionary<string, object> 
+                            {
+                                { "type", 101 },
+                                { "audioInputFormats", 67108860 },
+                                { "audioOutputFormats", 67108860 }
+                            }
+                        }
                     }
                 },
+                { "vv", 2 },
+                { "statusFlags", 4 },
+                { "keepAliveLowPower", true },
+                { "sourceVersion", "220.68" },
+                { "pk", "29fbb183a58b466e05b9ab667b3c429d18a6b785637333d3f0f3a34baa89f45c" },
+                { "keepAliveSendStatsAsBody", true },
+                { "deviceID", "78:7B:8A:BD:C9:4D" },
+                { "model", "AppleTV5,3" },
                 {
-                    new Dictionary<string, object> {
-                        { "outputLatencyMicros", 0 },
-                        { "type", 101 },
-                        { "audioType", "default" },
-                        { "inputLatencyMicros", 0 }
+                    "audioLatencies",
+                    new List<Dictionary<string, object>>
+                    {
+                        {
+                            new Dictionary<string, object> 
+                            {
+                                { "outputLatencyMicros", 0 },
+                                { "type", 100 },
+                                { "audioType", "default" },
+                                { "inputLatencyMicros", 0 }
+                            }
+                        },
+                        {
+                            new Dictionary<string, object> 
+                            {
+                                { "outputLatencyMicros", 0 },
+                                { "type", 101 },
+                                { "audioType", "default" },
+                                { "inputLatencyMicros", 0 }
+                            }
+                        }
                     }
-                }
-            });
-            dict.Add("macAddress", "78:7B:8A:BD:C9:4D");
+                },
+                { "macAddress", "78:7B:8A:BD:C9:4D" }
+            };
 
             //var output = default(byte[]);
 
@@ -290,11 +305,10 @@ public class AirTunesListener : BaseTcpListener
             }
             else
             {
-                using var mem = new MemoryStream(request.Body);
-                var nsDict = PropertyListParser.Parse(mem) as NSDictionary;
-                var plistDict = nsDict.ToDictionary();
+                NSDictionary nsDict = (PropertyListParser.Parse(request.Body) as NSDictionary)!;
+                Dictionary<string, NSObject> plistDict = nsDict.ToDictionary();
 
-                if (plistDict.TryGetValue("streams", out NSObject value))
+                if (plistDict.TryGetValue("streams", out NSObject? value))
                 {
                     // Always one foreach request
                     // plistDict["streams"] is an array. The first element of that array is a dict that we are looking for.
@@ -304,25 +318,25 @@ public class AirTunesListener : BaseTcpListener
                     // If screen Mirroring
                     if (type == 110)
                     {
-                        session.StreamConnectionId = unchecked((ulong)(System.Int64)stream["streamConnectionID"]).ToString();
+                        session.StreamConnectionId = unchecked((ulong)stream["streamConnectionID"]).ToString();
 
                         // Set video data port
                         var streams = new Dictionary<string, List<Dictionary<string, object>>>()
+                        {
                             {
+                                "streams",
+                                new List<Dictionary<string, object>>
                                 {
-                                    "streams",
-                                    new List<Dictionary<string, object>>
                                     {
+                                        new Dictionary<string, object>
                                         {
-                                            new Dictionary<string, object>
-                                            {
-                                                { "type", 110 },
-                                                { "dataPort", _airPlayPort }
-                                            }
+                                            { "type", 110 },
+                                            { "dataPort", _airPlayPort }
                                         }
                                     }
                                 }
-                            };
+                            }
+                        };
 
                         // Old code using homemade plist writer
                         //byte[] output;
@@ -344,7 +358,7 @@ public class AirTunesListener : BaseTcpListener
                     // If audio session
                     if (type == 96)
                     {
-                        if (stream.TryGetValue("audioFormat", out object audioFormatValue))
+                        if (stream.TryGetValue("audioFormat", out object? audioFormatValue))
                         {
                             var audioFormat = (int)audioFormatValue;
                             session.AudioFormat = (AudioFormat)audioFormat;
@@ -352,29 +366,29 @@ public class AirTunesListener : BaseTcpListener
                             var description = GetAudioFormatDescription(audioFormat);
                             Console.WriteLine($"Audio type: {description}");
                         }
-                        if (stream.TryGetValue("controlPort", out object controlPortValue))
+                        if (stream.TryGetValue("controlPort", out object? controlPortValue))
                         {
                             // Use this port to request resend lost packet? (remote port)
                             var controlPort = Convert.ToUInt16((int)controlPortValue);
                         }
                         // Set audio data port
                         var streams = new Dictionary<string, List<Dictionary<string, object>>>()
+                        {
                             {
+                                "streams",
+                                new List<Dictionary<string, object>>
                                 {
-                                    "streams",
-                                    new List<Dictionary<string, object>>
                                     {
+                                        new Dictionary<string, object>
                                         {
-                                            new Dictionary<string, object>
-                                            {
-                                                { "type", 96 },
-                                                { "controlPort", 7002 },
-                                                { "dataPort", 7003 }
-                                            }
+                                            { "type", 96 },
+                                            { "controlPort", 7002 },
+                                            { "dataPort", 7003 }
                                         }
                                     }
                                 }
-                            };
+                            }
+                        };
 
                         // Old code using homemade plist writer
                         //byte[] output;
@@ -389,17 +403,17 @@ public class AirTunesListener : BaseTcpListener
 
                         // The NSObject.Wrap method cant handle these nested dicts and lists very well, so lets wrap and nest them ourselves.
                         var streamDict = new Dictionary<string, object>
-                            {
-                                { "type", 96 },
-                                { "controlPort", 7002 },
-                                { "dataPort", 7003 }
-                            };
+                        {
+                            { "type", 96 },
+                            { "controlPort", 7002 },
+                            { "dataPort", 7003 }
+                        };
                         var streamDictNsObj = NSObject.Wrap(streamDict);
                         var streamsList = new NSArray(streamDictNsObj);
                         var streamsDict = new NSDictionary(1)
-                            {
-                                { "streams", streamsList }
-                            };
+                        {
+                            { "streams", streamsList }
+                        };
 
                         var plistBytes = BinaryPropertyListWriter.WriteToArray(streamsDict);
 
@@ -410,37 +424,37 @@ public class AirTunesListener : BaseTcpListener
                 else
                 {
                     // Read ekey and eiv used to decode video and audio data
-                    if (plistDict.TryGetValue("et", out NSObject etValue))
+                    if (plistDict.TryGetValue("et", out NSObject? etValue))
                     {
                         // plist-cil only handles int and long from NSNumber, converting to short from int should be OK.
                         var et = Convert.ToInt16((int)etValue.ToObject());
                         Console.WriteLine($"ET: {et}");
                     }
-                    if (plistDict.TryGetValue("ekey", out NSObject ekeyValue))
+                    if (plistDict.TryGetValue("ekey", out NSObject? ekeyValue))
                     {
                         session.AesKey = (byte[])ekeyValue.ToObject();
                     }
-                    if (plistDict.TryGetValue("eiv", out NSObject eivValue))
+                    if (plistDict.TryGetValue("eiv", out NSObject? eivValue))
                     {
                         session.AesIv = (byte[])eivValue.ToObject();
                     }
-                    if (plistDict.TryGetValue("isScreenMirroringSession", out NSObject isScreenMirroringSessionValue))
+                    if (plistDict.TryGetValue("isScreenMirroringSession", out NSObject? isScreenMirroringSessionValue))
                     {
                         session.MirroringSession = (bool)isScreenMirroringSessionValue.ToObject();
                     }
-                    if (plistDict.TryGetValue("timingPort", out NSObject timingPortValue))
+                    if (plistDict.TryGetValue("timingPort", out NSObject? timingPortValue))
                     {
                         // Use this port to send heartbeat (remote port)
                         var timingPort = Convert.ToUInt16((int)timingPortValue.ToObject());
                     }
 
                     var dict = new Dictionary<string, object>()
-                        {
-                            // Original code used ushort (appropriate for ports) but this isnt actually
-                            // differentiable from int in the plist format.
-                            { "timingPort", (int)_airTunesPort },
-                            { "eventPort", (int)_airTunesPort }
-                        };
+                    {
+                        // Original code used ushort (appropriate for ports) but this isnt actually
+                        // differentiable from int in the plist format.
+                        { "timingPort", (int)_airTunesPort },
+                        { "eventPort", (int)_airTunesPort }
+                    };
 
                     // Old code using homemade plist writer
                     //byte[] output;
@@ -588,13 +602,12 @@ public class AirTunesListener : BaseTcpListener
         }
         if (request.Type == RequestType.TEARDOWN)
         {
-            using var mem = new MemoryStream(request.Body);
-            var plist = BinaryPropertyListParser.Parse(mem) as NSDictionary;
+            NSDictionary plist = (BinaryPropertyListParser.Parse(request.Body) as NSDictionary)!;
 
-            if (plist.ContainsKey("streams"))
+            if (plist.TryGetValue("streams", out NSObject value))
             {
                 // Always one foreach request
-                var stream = (Dictionary<string, object>)((object[])plist["streams"].ToObject()).Last();
+                var stream = (Dictionary<string, object>)((object[])value.ToObject()).Last();
                 var type = Convert.ToInt16((int)stream["type"]);
 
                 // If screen Mirroring

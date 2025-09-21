@@ -162,12 +162,11 @@ public class AudioListener : BaseUdpListener
                 InitAesCbcCipher(session.DecryptedAesKey, session.EcdhShared, session.AesIv);
 
                 bool no_resend = false;
-                int buf_ret;
-                byte[] audiobuf;
+                byte[]? audiobuf;
                 int audiobuflen = 0;
                 uint timestamp = 0;
 
-                buf_ret = RaopBufferQueue(_raopBuffer, packet, (ushort)dret, session);
+                int buf_ret = RaopBufferQueue(_raopBuffer, packet, (ushort)dret, session);
 
                 //if(_raopBuffer.LastSeqNum - _raopBuffer.FirstSeqNum > (RAOP_BUFFER_LENGTH / 8))
                 //{
@@ -175,15 +174,14 @@ public class AudioListener : BaseUdpListener
                 while ((audiobuf = RaopBufferDequeue(_raopBuffer, ref audiobuflen, ref timestamp, no_resend)) != null)
                 {
                     if (audiobuf.Length == 0)
-                    {
                         continue; // Skip empty buffers
-                    }
 
-                    var pcmData = new PcmData();
-                    pcmData.Length = 960;
-                    pcmData.Data = audiobuf;
-
-                    pcmData.Pts = (ulong)(timestamp - _sync_timestamp) * 1000000UL / 44100 + _sync_time;
+                    var pcmData = new PcmData
+                    {
+                        Length = 960,
+                        Data = audiobuf,
+                        Pts = (ulong)(timestamp - _sync_timestamp) * 1000000UL / 44100 + _sync_time
+                    };
 
                     _receiver.OnPCMData(pcmData);
                 }
@@ -344,7 +342,7 @@ public class AudioListener : BaseUdpListener
         return 1;
     }
 
-    public byte[] RaopBufferDequeue(RaopBuffer raop_buffer, ref int length, ref uint pts, bool noResend)
+    public static byte[]? RaopBufferDequeue(RaopBuffer raop_buffer, ref int length, ref uint pts, bool noResend)
     {
         short buflen;
         RaopBufferEntry entry;
