@@ -11,13 +11,13 @@ public partial class SessionManager
 {
     private readonly ConcurrentDictionary<string, Session> _sessions = [];
 
-    public event EventHandler<Session> OnSessionsAddedOrUpdated;
+    public event EventHandler<Session>? OnSessionsAddedOrUpdated;
 
     public IReadOnlyDictionary<string, Session> Sessions => _sessions;
 
     public Task<Session> GetSessionAsync(string key)
     {
-        _sessions.TryGetValue(key, out Session _session);
+        _sessions.TryGetValue(key, out Session? _session);
         return Task.FromResult(_session ?? new Session(key));
     }
 
@@ -57,6 +57,6 @@ public partial class SessionManager
 
 partial class SessionManager
 {
-    private static SessionManager _current = null;
+    private static SessionManager? _current = null;
     public static SessionManager Current => _current ??= new SessionManager();
 }

@@ -21,9 +21,9 @@ public class Session(string sessionId)
     public string StreamConnectionId { get; set; } = null;
     public AudioFormat AudioFormat { get; set; } = AudioFormat.Unknown;
 
-    public MirroringListener MirroringListener = null;
-    public StreamingListener StreamingListener = null;
-    public AudioListener AudioControlListener = null;
+    public MirroringListener? MirroringListener = null;
+    public StreamingListener? StreamingListener = null;
+    public AudioListener? AudioControlListener = null;
 
     public byte[] DecryptedAesKey { get; set; } = null;
     public byte[] SpsPps { get; set; } = null;

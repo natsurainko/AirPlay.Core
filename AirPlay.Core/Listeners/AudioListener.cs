@@ -200,6 +200,13 @@ public class AudioListener : BaseUdpListener
         Console.WriteLine("Closing audio data socket..");
     }
 
+    protected override async Task OnAllSocketsClosed()
+    {
+        var session = await SessionManager.Current.GetSessionAsync(_sessionId);
+        session.AudioControlListener = null;
+        await SessionManager.Current.CreateOrUpdateSessionAsync(_sessionId, session);
+    }
+
     public Task FlushAsync(int nextSequence)
     {
         RaopBufferFlush(_raopBuffer, nextSequence);

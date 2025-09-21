@@ -15,8 +15,8 @@ public class BaseUdpListener : BaseListener
 
     public BaseUdpListener(ushort cPort, ushort dPort)
     {
-        _cSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, System.Net.Sockets.ProtocolType.Udp);
-        _dSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, System.Net.Sockets.ProtocolType.Udp);
+        _cSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        _dSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
         _cSocket.Bind(new IPEndPoint(IPAddress.Any, cPort));
         _dSocket.Bind(new IPEndPoint(IPAddress.Any, dPort));
@@ -28,8 +28,14 @@ public class BaseUdpListener : BaseListener
     {
         var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _cancellationTokenSource.Token);
 
-        Task.Run(() => OnRawCSocketAsync(_cSocket, source.Token), source.Token);
-        Task.Run(() => OnRawDSocketAsync(_dSocket, source.Token), source.Token);
+        var cSocketTask = Task.Run(() => OnRawCSocketAsync(_cSocket, source.Token), source.Token);
+        var dSocketTask = Task.Run(() => OnRawDSocketAsync(_dSocket, source.Token), source.Token);
+
+        Task.WhenAll(cSocketTask, dSocketTask).ContinueWith(async t =>
+        {
+            await StopAsync();
+            await OnAllSocketsClosed();
+        }, cancellationToken);
 
         return Task.CompletedTask;
     }
@@ -50,6 +56,11 @@ public class BaseUdpListener : BaseListener
     }
 
     public virtual Task OnRawDSocketAsync(Socket dSocket, CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
+
+    protected virtual Task OnAllSocketsClosed()
     {
         return Task.CompletedTask;
     }
