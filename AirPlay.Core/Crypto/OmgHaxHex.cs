@@ -79,7 +79,7 @@ public class OmgHaxHex
     private static byte[] ReadTableBytes(string key)
     {
         var assembly = Assembly.GetExecutingAssembly();
-        using (var s = assembly.GetManifestResourceStream($"AirPlay.Resources.{key}.bin"))
+        using (var s = assembly.GetManifestResourceStream($"AirPlay.Core.Resources.{key}.bin"))
         using (StreamReader reader = new StreamReader(s))
         {
             var data = reader.ReadToEnd();
@@ -98,7 +98,7 @@ public class OmgHaxHex
     private static int[] ReadTableInts(string key)
     {
         var assembly = Assembly.GetExecutingAssembly();
-        using (var s = assembly.GetManifestResourceStream($"AirPlay.Resources.{key}.bin"))
+        using (var s = assembly.GetManifestResourceStream($"AirPlay.Core.Resources.{key}.bin"))
         using (StreamReader reader = new StreamReader(s))
         {
             var data = reader.ReadToEnd();
